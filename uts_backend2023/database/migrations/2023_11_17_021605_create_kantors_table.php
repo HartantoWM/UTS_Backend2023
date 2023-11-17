@@ -16,11 +16,11 @@ return new class extends Migration
 
             $table->id();
             $table->string('name');
-            $table->string('gender');
+            $table->enum('gender', ["laki-laki", "perempuan"]);
             $table->string('phone');
             $table->string('alamat');
             $table->string('email');
-            $table->string('status');
+            $table->enum('status', ['active', 'inactive', 'terminated']);
             $table->string('hired_on');
             $table->timestamps();
             

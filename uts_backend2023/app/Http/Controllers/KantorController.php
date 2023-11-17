@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\Models\Kantor;
-
+use App\Models\Kantor;
 class KantorController extends Controller
 {
     // Method untuk menampilkan seluruh data pegawai
@@ -40,15 +39,20 @@ class KantorController extends Controller
             "phone" => "required",
             "alamat" => "required",
             "email" => "required",
+            "status" => "required",
+            "hired_on" => "required",
         ]);
 
         // data yang ditambahkan 
         $input = [
-            'name' => $request->nama,
+            'name' => $request->name,
             'gender'=> $request->gender,
             'phone'=> $request->phone,
             'alamat'=> $request->alamat,
-            'email'=> $request->email
+            'email'=> $request->email,
+            'status' => $request->status,
+            'hired_on' => $request->hired_on,
+
         ];
 
         // menggunakan elequent create untuk menambahkan data karyawan yang baru
@@ -83,11 +87,13 @@ class KantorController extends Controller
 
         // Menggunakan elquent update untuk mengubah data karyawan dan akan menampikan kembali menggunakan elquent all
         $kantor->update([
-            "name" => $request->nama ?? $kantor->nama,
+            "name" => $request->name ?? $kantor->nama,
             "gender" => $request->gender ?? $request->gender,
             "phone" => $request->phone ?? $request->phone,
             "alamat" => $request->alamat ?? $request->alamat,
             "email" => $request->email ?? $request->email,
+            "status" => $request->status ?? $request->status,
+            "hired_on" => $request->hired_on ?? $request->hired_on,
         ]);
 
         // Membuat data response
@@ -101,10 +107,10 @@ class KantorController extends Controller
     }
 
     // method function untuk menghapus data pegawai 
-    public function delete($id)
+    public function destroy($id)
     {
         // menggunakan elquend find untuk mencari data pegawai berdasarkan id 
-        $kantor = Kantor::factory($id);
+        $kantor = Kantor::find($id);
         // jika data pegawai tidak di temukan
         if (!$kantor){
             // membuat response data 

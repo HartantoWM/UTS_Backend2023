@@ -10,6 +10,6 @@ class Kantor extends Model
     use HasFactory;
 
     //nama tables atribute yang dipakai
-    protected $fillable = ["id", "name", "gender", "phone", "alamat", "status", "hired_on"];
+    protected $fillable = ["name", "gender", "phone", "email","alamat", "status", "hired_on"];
 
 }
